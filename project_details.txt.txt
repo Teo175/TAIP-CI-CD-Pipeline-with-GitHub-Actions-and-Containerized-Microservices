@@ -1,0 +1,13 @@
+Project name: CI/CD Pipeline with GitHub Actions and Containerized Microservices
+
+Members: 
+  ○ Culidiuc Maria - SD
+  ○ Grecu Narcis - SD
+  ○ Peteri Maria Teodora - ISS
+
+Scrum master: Grecu Narcis
+
+Contact information - Discord usernames
+  ○ Culidiuc Maria - mariaxculidiuc
+  ○ Grecu Narcis - narcis8227
+  ○ Peteri Maria Teodora - teodora175
