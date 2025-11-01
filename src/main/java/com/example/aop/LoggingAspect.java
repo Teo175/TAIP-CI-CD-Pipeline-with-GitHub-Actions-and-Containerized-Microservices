@@ -1,13 +1,37 @@
 package com.example.aop;
 
-// AOP Pattern: Cross-cutting concern for logging
-public class LoggingAspect {
+import java.util.Arrays;
+import java.util.logging.Logger;
 
-    public void logBefore(String methodName) {
-        System.out.println("[AOP] Before executing: " + methodName);
+/**
+ * Enhanced AOP aspect for logging with proper exception handling
+ */
+public class LoggingAspect {
+    private static final Logger logger = Logger.getLogger(LoggingAspect.class.getName());
+
+    /**
+     * Log before method execution
+     */
+    public void logBefore(String methodName, Object[] args) {
+        String argsString = args != null && args.length > 0
+                ? Arrays.toString(args)
+                : "no args";
+        logger.info("[AOP-BEFORE] " + methodName + " - Args: " + argsString);
     }
 
-    public void logAfter(String methodName) {
-        System.out.println("[AOP] After executing: " + methodName);
+    /**
+     * Log after successful method execution
+     */
+    public void logAfter(String methodName, Object result) {
+        logger.info("[AOP-AFTER] " + methodName + " - Result: " +
+                (result != null ? result.getClass().getSimpleName() : "void"));
+    }
+
+    /**
+     * Log when method throws exception
+     */
+    public void logException(String methodName, Throwable throwable) {
+        logger.severe("[AOP-EXCEPTION] " + methodName + " - Error: " +
+                throwable.getClass().getSimpleName() + " - " + throwable.getMessage());
     }
 }

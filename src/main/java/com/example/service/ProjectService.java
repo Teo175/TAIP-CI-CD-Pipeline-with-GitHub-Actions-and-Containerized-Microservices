@@ -1,34 +1,56 @@
 package com.example.service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import com.example.model.Project;
-import com.example.repository.ProjectRepository;
+import com.example.observer.Event;
+import com.example.observer.EventBus;
+import com.example.observer.EventType;
+import com.example.repository.interfaces.IProjectRepository;
+import com.example.service.interfaces.IProjectService;
 
-public class ProjectService {
-    private final ProjectRepository projectRepository;
+import java.util.*;
 
-    public ProjectService(ProjectRepository projectRepository) {
-        this.projectRepository = projectRepository;
+public class ProjectService implements IProjectService {
+    private final IProjectRepository projectRepo;
+    private final EventBus eventBus;
+
+    public ProjectService(IProjectRepository projectRepo, EventBus eventBus) {
+        this.projectRepo = projectRepo;
+        this.eventBus = eventBus;
     }
 
-    public Project createProject(Project project) {
-        return null;
+    @Override
+    public void createProject(Project p) {
+        if (p == null || p.getProjectId() == null) throw new IllegalArgumentException("Project or id null");
+        projectRepo.save(p);
+        eventBus.publish(new Event(EventType.PROJECT_CREATED, p));
     }
 
-    public Optional<Project> getProjectById(String id) {
-        return null;
+    @Override
+    public void updateProject(String projectId, String name, String description) {
+        Project existing = projectRepo.findById(projectId);
+        if (existing == null) throw new NoSuchElementException("Project not found: " + projectId);
+        existing.setName(name);
+        existing.setDescription(description);
+        projectRepo.save(existing);
+        eventBus.publish(new Event(EventType.PROJECT_UPDATED, existing));
     }
 
-    public List<Project> getAllProjects() {
-        return null;
+    @Override
+    public void deleteProject(String projectId) {
+        Project p = projectRepo.findById(projectId);
+        projectRepo.delete(projectId);
+        eventBus.publish(new Event(EventType.PROJECT_DELETED, p));
     }
 
-    public Project updateProject(String id, Project project) {
-        return null;
+    @Override
+    public Project getProject(String projectId) {
+        return projectRepo.findById(projectId);
     }
 
-    public void deleteProject(String id) {
+    @Override
+    public List<Project> listProjects() {
+        return new ArrayList<>(projectRepo.findAll());
     }
 }

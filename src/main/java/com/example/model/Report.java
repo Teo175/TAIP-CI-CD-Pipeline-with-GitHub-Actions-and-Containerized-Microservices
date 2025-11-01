@@ -1,27 +1,28 @@
 package com.example.model;
 
-import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.Date;
 
 public class Report {
-    private String id;
-    private String projectId;
-    private int totalTasks;
-    private Map<String, Integer> tasksByStatus;
-    private LocalDateTime generatedAt;
+    private String reportId;
+    private int projectCount;
+    private int taskCount;
+    private Date timestamp;
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public Report() {}
 
-    public String getProjectId() { return projectId; }
-    public void setProjectId(String projectId) { this.projectId = projectId; }
+    public Report(String reportId, int projectCount, int taskCount, Date timestamp) {
+        this.reportId = reportId;
+        this.projectCount = projectCount;
+        this.taskCount = taskCount;
+        this.timestamp = timestamp;
+    }
 
-    public int getTotalTasks() { return totalTasks; }
-    public void setTotalTasks(int totalTasks) { this.totalTasks = totalTasks; }
-
-    public Map<String, Integer> getTasksByStatus() { return tasksByStatus; }
-    public void setTasksByStatus(Map<String, Integer> tasksByStatus) { this.tasksByStatus = tasksByStatus; }
-
-    public LocalDateTime getGeneratedAt() { return generatedAt; }
-    public void setGeneratedAt(LocalDateTime generatedAt) { this.generatedAt = generatedAt; }
+    public String getReportId() { return reportId; }
+    public void setReportId(String reportId) { this.reportId = reportId; }
+    public int getProjectCount() { return projectCount; }
+    public void setProjectCount(int projectCount) { this.projectCount = projectCount; }
+    public int getTaskCount() { return taskCount; }
+    public void setTaskCount(int taskCount) { this.taskCount = taskCount; }
+    public Date getTimestamp() { return timestamp; }
+    public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }
 }
