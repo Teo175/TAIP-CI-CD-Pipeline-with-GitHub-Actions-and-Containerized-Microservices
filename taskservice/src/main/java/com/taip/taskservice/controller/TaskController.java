@@ -17,17 +17,27 @@ public class TaskController {
     }
 
     @PostMapping
-    public Task createTask(@RequestBody Task task) { return null; }
+    public Task createTask(@RequestBody Task task) {
+        return taskService.createTask(task);
+    }
 
     @GetMapping("/{id}")
-    public Task getTask(@PathVariable Long id) { return null; }
+    public Task getTask(@PathVariable Long id) {
+        return taskService.getTask(id);
+    }
 
     @GetMapping
-    public List<Task> getAllTasks() { return null; }
+    public List<Task> getAllTasks() {
+        return taskService.getAllTasks();
+    }
 
     @PutMapping("/{id}")
-    public Task updateTask(@PathVariable Long id, @RequestBody Task task) { return null; }
+    public Task updateTask(@PathVariable Long id, @RequestBody Task task) {
+        return taskService.updateTask(id, task);
+    }
 
     @DeleteMapping("/{id}")
-    public void deleteTask(@PathVariable Long id) {}
+    public void deleteTask(@PathVariable Long id) {
+        taskService.deleteTask(id);
+    }
 }

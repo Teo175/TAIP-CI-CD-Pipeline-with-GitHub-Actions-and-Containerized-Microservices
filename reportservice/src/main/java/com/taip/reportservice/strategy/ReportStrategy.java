@@ -1,8 +1,9 @@
 package com.taip.reportservice.strategy;
 
+import com.taip.reportservice.model.Report;
 import java.util.List;
 import java.util.Map;
 
 public interface ReportStrategy {
-    void generateReport(List<Map<String, Object>> data);
+    Report generateReport(List<Map<String, Object>> data);
 }

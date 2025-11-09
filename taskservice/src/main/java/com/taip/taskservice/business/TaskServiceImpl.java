@@ -1,33 +1,54 @@
 package com.taip.taskservice.business;
 
 import com.taip.taskservice.model.Task;
+import com.taip.taskservice.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class TaskServiceImpl implements TaskService {
 
+    private final TaskRepository taskRepository;
+
+    public TaskServiceImpl(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
+
     @Override
     public Task createTask(Task task) {
-        return null;
+        if (task == null) {
+            throw new IllegalArgumentException("Task cannot be null");
+        }
+        return taskRepository.save(task);
     }
 
     @Override
     public Task getTask(Long id) {
-        return null;
+        if (id == null) {
+            throw new IllegalArgumentException("ID cannot be null");
+        }
+        return taskRepository.findById(id);
     }
 
     @Override
     public Task updateTask(Long id, Task task) {
-        return null;
+        if (id == null) {
+            throw new IllegalArgumentException("ID cannot be null");
+        }
+        task.setId(id);
+        return taskRepository.save(task);
     }
 
     @Override
     public void deleteTask(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("ID cannot be null");
+        }
+        taskRepository.delete(id);
     }
 
     @Override
     public List<Task> getAllTasks() {
-        return null;
+        return taskRepository.findAll();
     }
 }

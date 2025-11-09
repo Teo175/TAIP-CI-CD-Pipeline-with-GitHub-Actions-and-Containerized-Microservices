@@ -1,8 +1,11 @@
 package com.taip.reportservice.business;
 
 import com.taip.reportservice.factory.ReportStrategyFactory;
+import com.taip.reportservice.model.Report;
+import com.taip.reportservice.repository.ReportRepository;
 import com.taip.reportservice.strategy.ReportStrategy;
 import com.taip.reportservice.strategy.StrategyType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,17 +13,14 @@ import java.util.Map;
 
 @Service
 public class ReportServiceImpl implements ReportService {
-    private ReportStrategy strategy;
-
-    public void setReportStrategy(StrategyType type) {
-        this.strategy = ReportStrategyFactory.createStrategy(type);
-    }
+    @Autowired
+    private ReportRepository reportRepository;
 
     @Override
-    public void generateReport(List<Map<String, Object>> data) {
-        if (strategy != null) {
-            strategy.generateReport(data);
-        }
+    public Report generateReport(StrategyType type, List<Map<String, Object>> data) {
+        ReportStrategy strategy = ReportStrategyFactory.createStrategy(type);
+        Report report = strategy.generateReport(data);
+        return reportRepository.save(report);
     }
 }
 

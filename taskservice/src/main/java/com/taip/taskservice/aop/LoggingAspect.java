@@ -12,9 +12,11 @@ public class LoggingAspect {
 
     @Before("reportServiceMethods()")
     public void logBefore(JoinPoint joinPoint) {
+        System.out.println("Executing method: " + joinPoint.getSignature().getName());
     }
 
     @After("reportServiceMethods()")
     public void logAfter(JoinPoint joinPoint) {
+        System.out.println("Completed method: " + joinPoint.getSignature().getName());
     }
 }

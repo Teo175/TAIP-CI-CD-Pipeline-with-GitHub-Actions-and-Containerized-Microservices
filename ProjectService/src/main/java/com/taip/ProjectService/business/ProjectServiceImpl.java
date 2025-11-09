@@ -1,23 +1,41 @@
 package com.taip.ProjectService.business;
 
 import com.taip.ProjectService.model.Project;
+import com.taip.ProjectService.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
-    @Override
-    public Project createProject(Project project) { return null; }
+    private final ProjectRepository projectRepository;
+
+    public ProjectServiceImpl(ProjectRepository projectRepository) {
+        this.projectRepository = projectRepository;
+    }
 
     @Override
-    public Project updateProject(Long id, Project project) { return null; }
+    public Project createProject(Project project) {
+        return projectRepository.save(project);
+    }
 
     @Override
-    public void deleteProject(Long id) {}
+    public Project updateProject(Long id, Project project) {
+        project.setId(id);
+        return projectRepository.save(project);
+    }
 
     @Override
-    public List<Project> getAllProjects() { return null; }
+    public void deleteProject(Long id) {
+        projectRepository.delete(id);
+    }
 
     @Override
-    public Project getProject(Long id) { return null; }
+    public List<Project> getAllProjects() {
+        return projectRepository.findAll();
+    }
+
+    @Override
+    public Project getProject(Long id) {
+        return projectRepository.findById(id);
+    }
 }
