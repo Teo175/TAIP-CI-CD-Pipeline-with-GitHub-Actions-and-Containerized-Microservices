@@ -13,6 +13,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public Task getTask(Long id) {
+        return null;
+    }
+
+    @Override
     public Task updateTask(Long id, Task task) {
         return null;
     }

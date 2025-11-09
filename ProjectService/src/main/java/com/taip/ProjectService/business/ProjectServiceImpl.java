@@ -17,4 +17,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Project> getAllProjects() { return null; }
+
+    @Override
+    public Project getProject(Long id) { return null; }
 }
