@@ -28,7 +28,7 @@ class TaskControllerTest {
 
     @BeforeEach
     void setUp() {
-        testTask = new Task(1L, "Test Task", "Test Description", false, 1L);
+        testTask = new Task("1", "TASK#1", "Test Task", "Test Description", false, "1");
     }
 
     @Test
@@ -44,13 +44,13 @@ class TaskControllerTest {
 
     @Test
     void getTask_ShouldReturnTask() {
-        when(taskService.getTask(1L)).thenReturn(testTask);
+        when(taskService.getTask("1")).thenReturn(testTask);
 
-        Task result = taskController.getTask(1L);
+        Task result = taskController.getTask("1");
 
         assertNotNull(result);
         assertEquals(testTask.getId(), result.getId());
-        verify(taskService).getTask(1L);
+        verify(taskService).getTask("1");
     }
 
     @Test
@@ -68,22 +68,22 @@ class TaskControllerTest {
 
     @Test
     void updateTask_ShouldReturnUpdatedTask() {
-        Task updatedTask = new Task(1L, "Updated Task", "Updated Description", true, 1L);
-        when(taskService.updateTask(1L, testTask)).thenReturn(updatedTask);
+        Task updatedTask = new Task("1", "TASK#1", "Updated Task", "Updated Description", true, "1");
+        when(taskService.updateTask("1", testTask)).thenReturn(updatedTask);
 
-        Task result = taskController.updateTask(1L, testTask);
+        Task result = taskController.updateTask("1", testTask);
 
         assertNotNull(result);
         assertEquals(updatedTask.getName(), result.getName());
-        verify(taskService).updateTask(1L, testTask);
+        verify(taskService).updateTask("1", testTask);
     }
 
     @Test
     void deleteTask_ShouldCallServiceDelete() {
-        doNothing().when(taskService).deleteTask(1L);
+        doNothing().when(taskService).deleteTask("1");
 
-        assertDoesNotThrow(() -> taskController.deleteTask(1L));
+        assertDoesNotThrow(() -> taskController.deleteTask("1"));
         
-        verify(taskService).deleteTask(1L);
+        verify(taskService).deleteTask("1");
     }
 }

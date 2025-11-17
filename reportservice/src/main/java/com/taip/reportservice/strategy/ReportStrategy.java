@@ -5,5 +5,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface ReportStrategy {
-    Report generateReport(List<Map<String, Object>> data);
+    Report generateReport(Map<String, Object> project, List<Map<String, Object>> tasks);
 }

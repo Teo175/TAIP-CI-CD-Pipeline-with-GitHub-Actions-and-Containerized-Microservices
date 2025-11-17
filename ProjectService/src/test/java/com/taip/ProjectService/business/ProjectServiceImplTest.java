@@ -26,47 +26,47 @@ class ProjectServiceImplTest {
     @Test
     void createProject_ShouldReturnCreatedProject() {
         Project inputProject = new Project(null, "Test Project", "Description", LocalDate.now());
-        Project savedProject = new Project(1L, "Test Project", "Description", LocalDate.now());
+        Project savedProject = new Project("1", "Test Project", "Description", LocalDate.now());
         when(projectRepository.save(inputProject)).thenReturn(savedProject);
         
         Project result = projectService.createProject(inputProject);
         
         assertNotNull(result);
-        assertEquals(1L, result.getId());
+        assertEquals("1", result.getId());
         assertEquals("Test Project", result.getName());
         verify(projectRepository).save(inputProject);
     }
 
     @Test
     void updateProject_ShouldReturnUpdatedProject() {
-        Project inputProject = new Project(1L, "Updated Project", "Updated Description", LocalDate.now());
+        Project inputProject = new Project("1", "Updated Project", "Updated Description", LocalDate.now());
         when(projectRepository.save(inputProject)).thenReturn(inputProject);
         
-        Project result = projectService.updateProject(1L, inputProject);
+        Project result = projectService.updateProject("1", inputProject);
         
         assertNotNull(result);
-        assertEquals(1L, result.getId());
+        assertEquals("1", result.getId());
         assertEquals("Updated Project", result.getName());
         verify(projectRepository).save(inputProject);
     }
 
     @Test
     void getProject_ShouldReturnProject() {
-        Project project = new Project(1L, "Test Project", "Description", LocalDate.now());
-        when(projectRepository.findById(1L)).thenReturn(project);
+        Project project = new Project("1", "Test Project", "Description", LocalDate.now());
+        when(projectRepository.findById("1")).thenReturn(project);
         
-        Project result = projectService.getProject(1L);
+        Project result = projectService.getProject("1");
         
         assertNotNull(result);
-        assertEquals(1L, result.getId());
-        verify(projectRepository).findById(1L);
+        assertEquals("1", result.getId());
+        verify(projectRepository).findById("1");
     }
 
     @Test
     void getAllProjects_ShouldReturnProjectList() {
         List<Project> projects = Arrays.asList(
-            new Project(1L, "Project 1", "Description 1", LocalDate.now()),
-            new Project(2L, "Project 2", "Description 2", LocalDate.now())
+            new Project("1", "Project 1", "Description 1", LocalDate.now()),
+            new Project("2", "Project 2", "Description 2", LocalDate.now())
         );
         when(projectRepository.findAll()).thenReturn(projects);
         
@@ -79,8 +79,8 @@ class ProjectServiceImplTest {
 
     @Test
     void deleteProject_ShouldCallRepository() {
-        projectService.deleteProject(1L);
+        projectService.deleteProject("1");
         
-        verify(projectRepository).delete(1L);
+        verify(projectRepository).delete("1");
     }
 }

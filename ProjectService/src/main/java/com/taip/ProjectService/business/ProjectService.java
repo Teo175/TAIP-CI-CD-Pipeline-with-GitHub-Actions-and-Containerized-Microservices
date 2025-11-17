@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface ProjectService {
     Project createProject(Project project);
-    Project updateProject(Long id, Project project);
-    void deleteProject(Long id);
+    Project updateProject(String id, Project project);
+    void deleteProject(String id);
     List<Project> getAllProjects();
-    Project getProject(Long id);
+    Project getProject(String id);
 }

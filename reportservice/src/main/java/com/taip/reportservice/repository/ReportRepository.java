@@ -7,8 +7,8 @@ import java.util.List;
 @Repository
 public interface ReportRepository {
     Report save(Report report);
-    Report findById(Long id);
+    Report findById(String id);
     List<Report> findAll();
-    void delete(Long id);
+    void delete(String id);
 }
 

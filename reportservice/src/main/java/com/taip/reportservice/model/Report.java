@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Report {
-    private Long id;
+    private String id;
     private String name;
     private String content;
     private LocalDate generatedAt;

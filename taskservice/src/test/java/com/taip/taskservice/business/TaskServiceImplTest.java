@@ -28,12 +28,12 @@ class TaskServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        testTask = new Task(null, "Test Task", "Test Description", false, 1L);
+        testTask = new Task(null, null, "Test Task", "Test Description", false, "1");
     }
 
     @Test
     void createTask_ShouldReturnCreatedTask() {
-        Task savedTask = new Task(1L, testTask.getName(), testTask.getDescription(), testTask.isCompleted(), testTask.getProjectId());
+        Task savedTask = new Task("1", "TASK#1", testTask.getName(), testTask.getDescription(), testTask.isCompleted(), testTask.getProjectId());
         when(taskRepository.save(testTask)).thenReturn(savedTask);
         
         Task result = taskService.createTask(testTask);
@@ -46,24 +46,24 @@ class TaskServiceImplTest {
 
     @Test
     void updateTask_ShouldReturnUpdatedTask() {
-        Task updatedTask = new Task(1L, "Updated Task", "Updated Description", true, 2L);
+        Task updatedTask = new Task("1", "TASK#1", "Updated Task", "Updated Description", true, "2");
         when(taskRepository.save(any(Task.class))).thenReturn(updatedTask);
         
-        Task result = taskService.updateTask(1L, updatedTask);
+        Task result = taskService.updateTask("1", updatedTask);
         
         assertNotNull(result);
-        assertEquals(1L, result.getId());
+        assertEquals("1", result.getId());
         assertEquals(updatedTask.getName(), result.getName());
         verify(taskRepository).save(any(Task.class));
     }
 
     @Test
     void deleteTask_ShouldNotThrowException() {
-        doNothing().when(taskRepository).delete(1L);
+        doNothing().when(taskRepository).delete("1");
         
-        assertDoesNotThrow(() -> taskService.deleteTask(1L));
+        assertDoesNotThrow(() -> taskService.deleteTask("1"));
         
-        verify(taskRepository).delete(1L);
+        verify(taskRepository).delete("1");
     }
 
     @Test

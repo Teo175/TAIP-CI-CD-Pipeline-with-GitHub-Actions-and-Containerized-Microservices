@@ -1,0 +1,4 @@
+FROM amazoncorretto
+
+WORKDIR /taip
+

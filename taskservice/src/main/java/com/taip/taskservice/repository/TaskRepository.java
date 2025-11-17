@@ -7,7 +7,8 @@ import java.util.List;
 @Repository
 public interface TaskRepository {
     Task save(Task task);
-    Task findById(Long id);
+    Task findById(String id);
     List<Task> findAll();
-    void delete(Long id);
+    List<Task> findByProjectId(String projectId);
+    void delete(String id);
 }

@@ -19,13 +19,13 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project updateProject(Long id, Project project) {
+    public Project updateProject(String id, Project project) {
         project.setId(id);
         return projectRepository.save(project);
     }
 
     @Override
-    public void deleteProject(Long id) {
+    public void deleteProject(String id) {
         projectRepository.delete(id);
     }
 
@@ -35,7 +35,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project getProject(Long id) {
+    public Project getProject(String id) {
         return projectRepository.findById(id);
     }
 }

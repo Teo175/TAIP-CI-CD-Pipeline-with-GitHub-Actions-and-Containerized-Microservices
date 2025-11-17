@@ -1,10 +1,9 @@
 package com.taip.reportservice.controller;
 
 import com.taip.reportservice.business.ReportService;
+import com.taip.reportservice.model.Report;
+import com.taip.reportservice.strategy.StrategyType;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/reports")
@@ -16,16 +15,18 @@ public class ReportController {
         this.reportService = reportService;
     }
 
-    @PostMapping("/summary")
-    public void generateSummaryReport(@RequestBody List<Map<String, Object>> data) {
+    @PostMapping("/summary/{projectId}")
+    public Report generateSummaryReport(@PathVariable String projectId) {
+        return reportService.generateReport(StrategyType.SUMMARY, projectId);
     }
 
-
-    @PostMapping("/detailed")
-    public void generateDetailedReport(@RequestBody List<Map<String, Object>> data) {
+    @PostMapping("/detailed/{projectId}")
+    public Report generateDetailedReport(@PathVariable String projectId) {
+        return reportService.generateReport(StrategyType.DETAILED, projectId);
     }
 
-    @PostMapping("/performance")
-    public void generatePerformanceReport(@RequestBody List<Map<String, Object>> data) {
+    @PostMapping("/performance/{projectId}")
+    public Report generatePerformanceReport(@PathVariable String projectId) {
+        return reportService.generateReport(StrategyType.PERFORMANCE, projectId);
     }
 }

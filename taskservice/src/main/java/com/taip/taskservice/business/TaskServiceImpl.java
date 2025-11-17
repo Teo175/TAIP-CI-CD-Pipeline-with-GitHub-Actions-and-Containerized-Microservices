@@ -23,7 +23,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task getTask(Long id) {
+    public Task getTask(String id) {
         if (id == null) {
             throw new IllegalArgumentException("ID cannot be null");
         }
@@ -31,7 +31,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task updateTask(Long id, Task task) {
+    public Task updateTask(String id, Task task) {
         if (id == null) {
             throw new IllegalArgumentException("ID cannot be null");
         }
@@ -40,7 +40,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void deleteTask(Long id) {
+    public void deleteTask(String id) {
         if (id == null) {
             throw new IllegalArgumentException("ID cannot be null");
         }
@@ -50,5 +50,9 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
+    }
+
+    public List<Task> getTasksByProjectId(String projectId) {
+        return taskRepository.findByProjectId(projectId);
     }
 }
